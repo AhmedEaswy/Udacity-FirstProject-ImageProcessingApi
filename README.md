@@ -20,7 +20,10 @@ $ npm run test
 ### `Endpoint for Test API IMAGES`
 
 http://localhost:3000/image/3.jpg?height=300&width=300 [ENDPOINT].
-avaliable images ['1.jpg', '2.jpg', '3.jpg']
+
+# Avaliable Images
+['encenadaport.jpg', 'fjord.jpg', 'icelandwaterfall.jpg', 'palmtunnel.jpg', 'santamonica.jpg']
+
 ## Project Directories
 
 ### `images`
