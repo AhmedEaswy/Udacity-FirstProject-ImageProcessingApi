@@ -1,6 +1,5 @@
 import express from "express";
 import * as dotenv from 'dotenv';
-import path from 'path'
 
 // importing routes
 import convertRoute from './routes/resize'
