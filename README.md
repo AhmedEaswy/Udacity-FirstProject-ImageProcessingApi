@@ -50,3 +50,6 @@ has interfaces
 ## `src/utilites`
 
 has image transform function
+## `src/routes`
+
+has project routes such as (image processing api route)
