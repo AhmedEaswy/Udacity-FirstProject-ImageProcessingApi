@@ -2,73 +2,56 @@ import express from 'express'
 import sharp from 'sharp'
 import path from 'path'
 import fs from 'fs'
+import imageProcess from '../utilites/imageProcess'
+import { Options, FileOptions } from '../types/imageInterface'
 
 const router = express.Router()
-
-interface Options {
-  root: string
-}
 
 const options: Options = {
   root: path.join(path.resolve(), 'converted-images'),
 }
 
 router.get('/image/:filepath', async (req, res): Promise<void> => {
+
   // OPTIONS & PARAMS
-  const fileName: string = req.params.filepath
+  const processOptions: FileOptions = {
+    fullPath: path.join(path.resolve(), 'images', req.params.filepath),
+    convertPath: path.join(path.resolve(), 'converted-images',req.params.filepath),
+    h: req.query.height ? req.query.width : 400,
+    w: req.query.width ? req.query.width : 400,
+    fileName: req.params.filepath
+  }
 
-  // Paths
-  const fullPath: string = path.join(path.resolve(), 'images', fileName)
-  const convertPath: string = path.join(
-    path.resolve(),
-    'converted-images',
-    fileName
-  )
-
-  // Side Params
-  const h: any = req.query.height ? req.query.height : 400,
-        w: any = req.query.width ? req.query.width : 400;
-        
   // get input image dismentions
-  const image = fs.existsSync(convertPath)
-    ? await sharp(convertPath).metadata()
+  const image = fs.existsSync(processOptions.convertPath)
+    ? await sharp(processOptions.convertPath).metadata()
     : null
-
+  
   // Resize AND Converting Images
   if (
-    image ? image.height == parseInt(h) && image.width == parseInt(w) : false
+    image ? image.height == parseInt(processOptions.h) && image.width == parseInt(processOptions.w) : false
   ) {
     // Return Coverted File
     res.type('image/png')
-    res.status(200).sendFile(fileName, options, () => {
+    res.status(200).sendFile(processOptions.fileName, options, () => {
       console.log(
-        `Alreay Converted on : ${path.resolve()}/converted-images/${fileName}`
+        `Alreay Converted on : ${processOptions.convertPath}`
       )
     })
   } else {
-    await sharp(fullPath)
-      .resize({
-        height: parseInt(h),
-        width: parseInt(w),
+
+    const myFunc = await imageProcess(processOptions)
+    if (myFunc === 'success') {
+      res.status(200).sendFile(processOptions.fileName, options, () => {
+        console.log(
+          `Converted on : ${processOptions.convertPath}`
+        )
       })
-      .toFile(convertPath)
-      .then(function () { // (newFileInfo)
-        // newFileInfo holds the output file properties
-        console.log('Success')
-        res.type('image/png')
-        // Return Coverted File
-        res.status(200).sendFile(fileName, options, () => {
-          console.log(
-            `Converted on : ${path.resolve()}/converted-images/${fileName}`
-          )
-        })
+    } else {
+      res.status(404).json({
+        message: myFunc,
       })
-      // Handel Error
-      .catch(function () {
-        res.status(404).json({
-          message: 'image not found 404',
-        })
-      })
+    }
   }
 })
 

@@ -10,7 +10,7 @@ describe('Get /image/:fileName endpoint', () => {
   })
 
   it('Expect to throw error not found', async () => {
-    const response = await request.get('/image/274856.jpg')
-    expect(response.status).toBe(404)
+    const faileRes = await request.get('/image/274856.jpg')
+    expect(faileRes.status).toBe(404)
   })
 })
