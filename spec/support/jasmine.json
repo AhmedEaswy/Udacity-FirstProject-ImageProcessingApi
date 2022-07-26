@@ -1,8 +1,11 @@
 {
   "spec_dir": "dist/tests",
-  "spec_files": ["**/*[sS]pec.?(m)js"],
-  "helpers": ["helpers/**/*.?(m)js"],
-  "DEFAULT_TIMEOUT_INTERVAL": 8000,
+  "spec_files": [
+    "**/*[sS]pec.?(m)js"
+  ],
+  "helpers": [
+    "helpers/**/*.?(m)js"
+  ],
   "env": {
     "stopSpecOnExpectationFailure": false,
     "random": false
