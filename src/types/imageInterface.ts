@@ -1,16 +1,13 @@
 interface Options {
-    root: string
+  root: string
 }
 
 interface FileOptions {
-    fullPath: string,
-    convertPath: string,
-    h: any,
-    w: any,
-    fileName: string,
+  fullPath: string
+  convertPath: string
+  h: any
+  w: any
+  fileName: string
 }
-  
-export {
-    Options,
-    FileOptions
-}
+
+export { Options, FileOptions }
