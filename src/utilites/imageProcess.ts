@@ -9,8 +9,8 @@ const imageProcess = async (
 ): Promise<Error | string> => {
   return await sharp(fileOptions.fullPath)
     .resize({
-      height: parseInt(fileOptions.h),
-      width: parseInt(fileOptions.w),
+      height: Number(fileOptions.h),
+      width: Number(fileOptions.w),
     })
     .toFile(fileOptions.convertPath)
     .then(function () {

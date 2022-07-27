@@ -38,8 +38,8 @@ router.get(
       // Return Coverted File
       if (
         await validateImage(
-          parseInt(processOptions.h),
-          parseInt(processOptions.w)
+          Number(processOptions.h),
+          Number(processOptions.w)
         )
       ) {
         res.type('image/png')
