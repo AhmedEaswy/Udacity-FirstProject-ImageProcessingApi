@@ -7,7 +7,8 @@ interface FileOptions {
   convertPath: string
   h: any
   w: any
-  fileName: string
+  fileName: string,
+  covertedFileName: string
 }
 
 export { Options, FileOptions }

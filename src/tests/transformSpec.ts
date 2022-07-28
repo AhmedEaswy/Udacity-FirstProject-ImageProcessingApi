@@ -2,11 +2,13 @@ import path from 'path'
 import imageProcess from '../utilites/imageProcess'
 import { FileOptions } from '../types/imageInterface'
 import validateImage from '../utilites/validateImage'
+
 const processOptions: FileOptions = {
   fullPath: path.join(path.resolve(), 'images', 'fjord.jpg'),
-  convertPath: path.join(path.resolve(), 'converted-images', 'fjord.jpg'),
-  h: 400,
-  w: 400,
+  convertPath: path.join(path.resolve(), 'converted-images', 'fjord500X500.png'),
+  h: 500,
+  w: 500,
+  covertedFileName: 'fjord500X500.png',
   fileName: 'fjord.jpg',
 }
 
@@ -14,8 +16,9 @@ const processOptionsFailed: FileOptions = {
   fullPath: path.join(path.resolve(), 'images', 'fjordtestgsgdshfa.jpg'),
   convertPath: path.join(path.resolve(), 'converted-images', 'fjord.jpg'),
   h: 400,
+  covertedFileName: 'fjordtestgsgdshfa.png',
   w: 400,
-  fileName: 'fjord.jpg',
+  fileName: 'fjordtestgsgdshfa.jpg',
 }
 
 describe('Image Transform Functionality', () => {

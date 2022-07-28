@@ -8,12 +8,13 @@ const imageProcess = async (
   fileOptions: FileOptions
 ): Promise<Error | string> => {
   return await sharp(fileOptions.fullPath)
+    .png()
     .resize({
-      height: Number(fileOptions.h),
-      width: Number(fileOptions.w),
+      height: parseInt(fileOptions.h),
+      width: parseInt(fileOptions.w),
     })
     .toFile(fileOptions.convertPath)
-    .then(function () {
+    .then(function () {      
       // newFileInfo holds the output file properties
       return 'success'
     })
